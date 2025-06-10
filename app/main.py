@@ -3,10 +3,7 @@ from app.services import ExcelProcessor
 from app.models import ListTablesResponse, TableDetailsResponse, RowSumResponse
 import os
 
-# --- Application Setup ---
 
-# Define the path to the Excel file
-# Using an absolute path relative to this file's location is robust
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EXCEL_FILE_PATH = os.path.join(BASE_DIR, "Data", "capbudg.xls")
 
@@ -17,9 +14,6 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# --- Global Service Instantiation ---
-# The Excel file is loaded once when the application starts up.
-# This avoids re-reading the file on every request, making the API fast.
 try:
     processor = ExcelProcessor(file_path=EXCEL_FILE_PATH)
 except Exception as e:
